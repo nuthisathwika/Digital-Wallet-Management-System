@@ -1,0 +1,54 @@
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+#include<map>
+#include<string>
+using namespace std;
+
+
+
+int main() {
+     int n;
+    cin>>n;
+    map<int,int>users;
+    for(int i=0;i<n;i++)
+    {
+int userId,balance;
+    cin>>userId>>balance;
+    users[userId]=balance;
+    }
+    int t;
+    cin>>t;
+    vector<string>res;
+    for(int i=0;i<t;i++)
+    {
+       int from,to,amt;
+        cin>>from>>to>>amt;
+        if(users[from]>=amt)
+        {
+         users[from]=users[from]-amt;
+            users[to]=users[to]+amt;
+          res.push_back("Success");
+        }    
+        else
+        {
+            res.push_back("Failure");
+        }
+    } 
+    for(const auto &result:res)
+    {
+cout<<result<<endl;
+    }
+    cout<<"\n";
+vector<pair<int, int>> userVec(users.begin(), users.end());
+    sort(userVec.begin(), userVec.end(), [](const pair<int, int>& a, const pair<int, int>& b) {
+        return a.second <b.second;
+    });   
+    for (const auto& user : userVec) {
+        cout << user.first << " " << user.second << endl;
+    }
+
+   return 0;
+}
